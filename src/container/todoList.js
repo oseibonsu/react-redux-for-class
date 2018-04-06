@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 
-import * as TodoActions from '../actions/todos';
-
+import * as TodoActions from '../actions/dogs';
+console.log(TodoActions);
 class TodoList extends Component {
   
   render(){
@@ -11,6 +11,9 @@ class TodoList extends Component {
     window.actions = this.props.actions;
     return <div>
       <h1>Todo List</h1>
+
+      {this.props.dogs.fetching && <h1>Fetching</h1>}
+      {this.props.dogs.data && <h1>{JSON.stringify(this.props.dogs.data )}</h1>}
       <ul>
         {this.props.todos.map(todo=><li key={todo.id} >{todo.text}</li>)}
       </ul>
@@ -28,7 +31,8 @@ class TodoList extends Component {
 
 function mapStateToProps(state){
   return {
-    todos: state.todos
+    todos: state.todos,
+    dogs: state.dogs
   }
 }
 
